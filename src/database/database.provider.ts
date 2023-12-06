@@ -1,4 +1,3 @@
-
 import { Sequelize } from 'sequelize-typescript';
 
 export const databaseProviders = [
@@ -13,7 +12,7 @@ export const databaseProviders = [
         password: 'ammarhashad',
         database: 'nest',
       });
-      sequelize.addModels([      ]);
+      sequelize.addModels([]);
       await sequelize.sync();
       return sequelize;
     },
