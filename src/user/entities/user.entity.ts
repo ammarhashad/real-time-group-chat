@@ -32,7 +32,7 @@ export class User extends Model<User> {
 
   @Column
   @Field(() => String)
-  surname: string;
+  password: string;
 
   @Column
   @IsDate
