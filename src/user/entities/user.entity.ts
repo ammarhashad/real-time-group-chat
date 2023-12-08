@@ -9,20 +9,20 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'User' })
 @ObjectType()
 export class User extends Model<User> {
   @Column({
-    type: DataType.UUIDV4,
+    type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
     primaryKey: true,
   })
   @Field(() => ID)
   id: string;
 
-  @Column
   @Unique
   @IsEmail
+  @Column
   @Field(() => String)
   email: string;
 
@@ -34,8 +34,8 @@ export class User extends Model<User> {
   @Field(() => String)
   password: string;
 
-  @Column
   @IsDate
+  @Column
   @Field(() => GraphQLISODateTime)
   createdAt: Date;
 }
