@@ -1,4 +1,19 @@
-import { Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UserService } from './user.service';
+import { User } from './entities/user.entity';
+import { NewUserInput } from './dto/user.dto';
+import { token } from './auth/interface/jwt-payload.interface';
 
 @Resolver()
-export class UserResolver {}
+export class UserResolver {
+  constructor(private userService: UserService) {}
+
+  @Query(() => String)
+  get() {
+    console.log('sa');
+  }
+  @Mutation(() => token)
+  registerUser(@Args('UserArgs') newUserInput: NewUserInput) {
+    return this.userService.register(newUserInput);
+  }
+}

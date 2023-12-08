@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 @InputType()
 export class NewUserInput {
   @Field(() => String)
-  @MaxLength(100)
+  @MaxLength(50)
   @IsNotEmpty()
   name: string;
 
@@ -17,4 +17,13 @@ export class NewUserInput {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+}
+
+@InputType()
+export class LoginUserInput {
+  @Field(() => String)
+  email: string;
+
+  @Field(() => String)
+  password: string;
 }
