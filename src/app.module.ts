@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { GroupModule } from './group/group.module';
 
 require('dotenv').config();
 
@@ -32,6 +33,7 @@ require('dotenv').config();
       autoSchemaFile: 'schema.gql',
     }),
     UserModule,
+    GroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],
