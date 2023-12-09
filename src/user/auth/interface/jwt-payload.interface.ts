@@ -6,7 +6,7 @@ export interface JwtPayload {
 }
 
 @ObjectType()
-export class token {
+export class AuthToken {
   @Field(() => String)
   token: string;
 }

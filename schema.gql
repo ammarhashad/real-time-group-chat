@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type token {
+type AuthToken {
   token: String!
 }
 
@@ -11,7 +11,13 @@ type Query {
 }
 
 type Mutation {
-  registerUser(UserArgs: NewUserInput!): token!
+  loginUser(LoginArgs: LoginInput!): AuthToken!
+  registerUser(UserArgs: NewUserInput!): AuthToken!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 input NewUserInput {

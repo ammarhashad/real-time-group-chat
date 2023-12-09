@@ -27,3 +27,16 @@ export class LoginUserInput {
   @Field(() => String)
   password: string;
 }
+
+@InputType()
+export class LoginInput {
+  @Field(() => String)
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @Field(() => String)
+  @MaxLength(8)
+  @IsNotEmpty()
+  password: string;
+}

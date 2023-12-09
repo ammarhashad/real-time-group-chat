@@ -1,8 +1,10 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { NewUserInput } from './dto/user.dto';
+import { LoginInput, NewUserInput } from './dto/user.dto';
 import { genSalt, hash, compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import GraphqlException from 'src/exceptions/graphql.exception';
+import { AuthToken, JwtPayload } from './auth/interface/jwt-payload.interface';
 
 @Injectable()
 export class UserService {
@@ -12,27 +14,70 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(newUserInput: NewUserInput) {
+  async register(
+    newUserInput: NewUserInput,
+  ): Promise<AuthToken | GraphqlException> {
     try {
       // check if user is already registered
       let user = await this.UserTable.findOne<User>({
         where: { email: newUserInput.email },
       });
       if (user) {
-        throw new HttpException('Email is already registered', 403);
+        return new GraphqlException(403, 'Email is already registered');
       }
+      //   hash password
       const salt = await genSalt(10);
       const hashed = await hash(newUserInput.password, salt);
+      //   create new user
       let newUser = new User({
         ...newUserInput,
         password: hashed,
       });
-      let expiration: Date;
-      expiration = new Date();
-      expiration.setTime(expiration.getTime() + 600000);
       await newUser.save();
 
-      let token = this.jwtService.sign({ id: newUser.id, expiration });
+      // token expiration
+      let expiration = new Date();
+      expiration.setTime(expiration.getTime() + 600000);
+      // new token payload
+      let payload: JwtPayload = {
+        id: newUser.id,
+        expiration,
+      };
+      // generate and return token
+      let token = this.jwtService.sign(payload);
+
+      return { token };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async login(loginInput: LoginInput): Promise<AuthToken | GraphqlException> {
+    try {
+      // find user by email
+      const user = await this.UserTable.findOne<User>({
+        where: { email: loginInput.email },
+      });
+      //   if user not found
+      if (!user) {
+        return new GraphqlException(404, 'Email is not registered');
+      }
+      //   check user's password
+      const isMatch = await compare(loginInput.password, user.password);
+      if (!isMatch) {
+        return new GraphqlException(403, 'Password is wrong');
+      }
+
+      //   token expiration
+      let expiration = new Date();
+      expiration.setTime(expiration.getTime() + 600000);
+      // new token payload
+      let payload: JwtPayload = {
+        id: user.id,
+        expiration,
+      };
+      // assign and return token
+      let token = this.jwtService.sign(payload);
 
       return { token };
     } catch (err) {
