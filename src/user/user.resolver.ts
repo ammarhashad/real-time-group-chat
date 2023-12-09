@@ -3,14 +3,18 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { LoginInput, NewUserInput } from './dto/user.dto';
 import { AuthToken } from './auth/interface/jwt-payload.interface';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './auth/guards/jwt.guard';
+import { LoggedInUser } from 'src/decorators/loggedInUser.decorator';
 
 @Resolver()
 export class UserResolver {
   constructor(private userService: UserService) {}
 
-  @Query(() => String)
-  get() {
-    console.log('sa');
+  @Query(() => User)
+  @UseGuards(JwtAuthGuard)
+  getUser(@LoggedInUser() user: User) {
+    return user;
   }
 
   @Mutation(() => AuthToken)

@@ -4,7 +4,7 @@ import { UserResolver } from './user.resolver';
 import { DatabaseModule } from 'src/database/database.module';
 import { User } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
-
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 require('dotenv').config();
 
 @Module({
@@ -21,6 +21,7 @@ require('dotenv').config();
   providers: [
     UserService,
     UserResolver,
+    JwtStrategy,
     { provide: 'UserTable', useValue: User },
   ],
 })

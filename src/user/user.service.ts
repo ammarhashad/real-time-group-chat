@@ -84,4 +84,18 @@ export class UserService {
       console.log(err);
     }
   }
+
+  async validateJwtPayload(
+    payload: JwtPayload,
+  ): Promise<User | GraphqlException> {
+    try {
+      const user = await this.UserTable.findByPk<User>(payload.id);
+      if (!user) {
+        return new GraphqlException(500, "Can't Authorize User");
+      }
+      return user;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }

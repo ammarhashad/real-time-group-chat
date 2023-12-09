@@ -6,7 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
-require('dotenv');
+require('dotenv').config();
 
 @Module({
   imports: [
