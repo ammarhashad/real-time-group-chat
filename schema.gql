@@ -37,11 +37,21 @@ type Membership {
   createdAt: DateTime!
 }
 
+type Message {
+  id: ID!
+  message: String!
+  userId: String!
+  user: User!
+  groupId: String!
+  group: Group!
+  createdAt: DateTime!
+}
+
 type Query {
   getUser: User!
   getAllGroups: [Group!]!
-  getMembershipsByuser: [Membership!]!
-  getMembershipsByGroup(MembershipInpur: MembershipInput!): [Membership!]!
+  getMembershipsByUser: [Membership!]!
+  getMembershipsByGroup(MembershipInput: MembershipInput!): [Membership!]!
 }
 
 input MembershipInput {
@@ -53,6 +63,7 @@ type Mutation {
   registerUser(UserArgs: NewUserInput!): AuthToken!
   createNewGroup(NewGroup: NewGroupInput!): Group!
   joinGroup(GroupID: MembershipInput!): Membership!
+  sendMessage(MessageInput: MessageInput!): Message!
 }
 
 input LoginInput {
@@ -68,4 +79,9 @@ input NewUserInput {
 
 input NewGroupInput {
   name: String!
+}
+
+input MessageInput {
+  message: String!
+  groupId: String!
 }

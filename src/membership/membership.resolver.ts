@@ -13,14 +13,14 @@ export class MembershipResolver {
 
   @Query(() => [Membership])
   @UseGuards(JwtAuthGuard)
-  getMembershipsByuser(@LoggedInUser() user: User) {
+  getMembershipsByUser(@LoggedInUser() user: User) {
     return this.membershipService.getMembershipsByUser(user);
   }
 
   @Query(() => [Membership])
   @UseGuards(JwtAuthGuard)
   getMembershipsByGroup(
-    @Args('MembershipInpur') membershipInput: MembershipInput,
+    @Args('MembershipInput') membershipInput: MembershipInput,
   ) {
     return this.membershipService.getMembershipsByGroup(membershipInput);
   }
