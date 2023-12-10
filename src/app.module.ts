@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { GroupModule } from './group/group.module';
+import { MembershipModule } from './membership/membership.module';
 
 require('dotenv').config();
 
@@ -34,6 +35,7 @@ require('dotenv').config();
     }),
     UserModule,
     GroupModule,
+    MembershipModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,6 @@
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
 import {
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -20,16 +21,24 @@ export class Group extends Model<Group> {
   @Field(() => ID)
   id: string;
 
-  @Field(() => User)
+  @Column
+  @Field(() => String)
+  name: string;
+
+  @Field(() => String)
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
-    field: 'user',
+    field: 'user_id',
   })
-  createdBy: User;
+  createdBy: string;
 
   @IsDate
   @Column
   @Field(() => GraphQLISODateTime)
   createdAt: Date;
+
+  @Field(() => User)
+  @BelongsTo(() => User)
+  user: User;
 }
