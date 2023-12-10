@@ -8,6 +8,7 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { GroupModule } from './group/group.module';
 import { MembershipModule } from './membership/membership.module';
 import { MessageModule } from './message/message.module';
+import { PubsubModule } from './pubsub/pubsub.module';
 
 require('dotenv').config();
 
@@ -38,6 +39,7 @@ require('dotenv').config();
     GroupModule,
     MembershipModule,
     MessageModule,
+    PubsubModule,
   ],
   controllers: [AppController],
   providers: [AppService],

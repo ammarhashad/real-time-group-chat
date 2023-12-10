@@ -40,12 +40,15 @@ export class MembershipService {
     }
   }
 
-  async getMembershipsByGroup(membershipInput: MembershipInput) {
+  async getMembershipsByGroup(
+    membershipInput: MembershipInput,
+  ): Promise<Membership[]> {
     try {
-      const memberships = await this.MembershipTable.findAll<Membership>({
-        where: { groupId: membershipInput.groupId },
-        include: 'user',
-      });
+      const memberships: Membership[] =
+        await this.MembershipTable.findAll<Membership>({
+          where: { groupId: membershipInput.groupId },
+          include: 'user',
+        });
       return memberships;
     } catch (err) {
       console.log(err);
