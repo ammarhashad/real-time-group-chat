@@ -11,5 +11,6 @@ import { PubsubResolver } from './pubsub.resolver';
     },
     PubsubResolver,
   ],
+  exports: ['PUB_SUB'],
 })
 export class PubsubModule {}

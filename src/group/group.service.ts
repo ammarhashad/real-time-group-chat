@@ -27,7 +27,7 @@ export class GroupService {
       });
       await newGroup.save();
       const newMembership = new Membership({
-        member: user.id,
+        userId: user.id,
         groupId: newGroup.id,
         type: MembershipType.Admin,
         createdAt: new Date(),

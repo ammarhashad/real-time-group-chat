@@ -29,7 +29,7 @@ type AuthToken {
 
 type Membership {
   id: ID!
-  member: String!
+  userId: String!
   groupId: String!
   type: String!
   user: User!
@@ -44,6 +44,14 @@ type Message {
   user: User!
   groupId: String!
   group: Group!
+  createdAt: DateTime!
+}
+
+type PubSubPayload {
+  userId: String!
+  groupId: String!
+  type: String!
+  message: String!
   createdAt: DateTime!
 }
 
@@ -84,4 +92,8 @@ input NewGroupInput {
 input MessageInput {
   message: String!
   groupId: String!
+}
+
+type Subscription {
+  listen: PubSubPayload!
 }

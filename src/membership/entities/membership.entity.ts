@@ -7,6 +7,7 @@ import {
   IsDate,
   Model,
   Table,
+  Unique,
 } from 'sequelize-typescript';
 import { Group } from 'src/group/entities/group.entity';
 import { User } from 'src/user/entities/user.entity';
@@ -16,7 +17,11 @@ export enum MembershipType {
   Admin = 'Admin',
 }
 
-@Table({ tableName: 'Membership' })
+@Table({
+  tableName: 'Membership',
+  //   To Insure user will have only one membership per group
+  indexes: [{ fields: ['user_id', 'group_id'], unique: true }],
+})
 @ObjectType()
 export class Membership extends Model<Membership> {
   @Column({
@@ -33,7 +38,7 @@ export class Membership extends Model<Membership> {
     type: DataType.UUID,
     field: 'user_id',
   })
-  member: string;
+  userId: string;
 
   @Field(() => String)
   @ForeignKey(() => Group)
