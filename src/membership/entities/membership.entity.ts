@@ -4,10 +4,8 @@ import {
   Column,
   DataType,
   ForeignKey,
-  IsDate,
   Model,
   Table,
-  Unique,
 } from 'sequelize-typescript';
 import { Group } from 'src/group/entities/group.entity';
 import { User } from 'src/user/entities/user.entity';
