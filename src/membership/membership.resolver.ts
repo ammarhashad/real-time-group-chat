@@ -2,10 +2,10 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { MembershipService } from './membership.service';
 import { Membership } from './entities/membership.entity';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/user/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../user/auth/guards/jwt.guard';
 import { MembershipInput } from './dto/membership.dto';
-import { LoggedInUser } from 'src/decorators/loggedInUser.decorator';
-import { User } from 'src/user/entities/user.entity';
+import { LoggedInUser } from '../decorators/loggedInUser.decorator';
+import { User } from '../user/entities/user.entity';
 
 @Resolver()
 export class MembershipResolver {

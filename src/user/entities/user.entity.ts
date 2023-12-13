@@ -9,7 +9,7 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
-import { Group } from 'src/group/entities/group.entity';
+import { Group } from '../../group/entities/group.entity';
 
 @Table({ tableName: 'User' })
 @ObjectType()

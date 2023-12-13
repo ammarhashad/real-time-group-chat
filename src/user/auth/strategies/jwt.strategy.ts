@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../../../user/user.service';
 import { JwtPayload } from '../interface/jwt-payload.interface';
-import GraphqlException from 'src/exceptions/graphql.exception';
+import GraphqlException from '../../../exceptions/graphql.exception';
 require('dotenv').config();
 
 @Injectable()

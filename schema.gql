@@ -37,6 +37,14 @@ type Membership {
   createdAt: DateTime!
 }
 
+type PubSubPayload {
+  userId: String!
+  groupId: String!
+  type: String!
+  message: String!
+  createdAt: DateTime!
+}
+
 type Message {
   id: ID!
   message: String!
@@ -44,14 +52,6 @@ type Message {
   user: User!
   groupId: String!
   group: Group!
-  createdAt: DateTime!
-}
-
-type PubSubPayload {
-  userId: String!
-  groupId: String!
-  type: String!
-  message: String!
   createdAt: DateTime!
 }
 

@@ -9,6 +9,8 @@ import { GroupModule } from './group/group.module';
 import { MembershipModule } from './membership/membership.module';
 import { MessageModule } from './message/message.module';
 import { PubsubModule } from './pubsub/pubsub.module';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { dataBaseConfig } from './database/database.config';
 
 require('dotenv').config();
 
@@ -40,6 +42,7 @@ require('dotenv').config();
     MembershipModule,
     MessageModule,
     PubsubModule,
+    SequelizeModule.forRoot(dataBaseConfig),
   ],
   controllers: [AppController],
   providers: [AppService],

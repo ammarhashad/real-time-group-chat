@@ -7,8 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Group } from 'src/group/entities/group.entity';
-import { User } from 'src/user/entities/user.entity';
+import { Group } from '../../group/entities/group.entity';
+import { User } from '../../user/entities/user.entity';
 
 export enum MembershipType {
   Member = 'Member',

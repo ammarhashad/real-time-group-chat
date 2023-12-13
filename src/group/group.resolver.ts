@@ -2,9 +2,9 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GroupService } from './group.service';
 import { Group } from './entities/group.entity';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/user/auth/guards/jwt.guard';
-import { LoggedInUser } from 'src/decorators/loggedInUser.decorator';
-import { User } from 'src/user/entities/user.entity';
+import { JwtAuthGuard } from '../user/auth/guards/jwt.guard';
+import { LoggedInUser } from '../decorators/loggedInUser.decorator';
+import { User } from '../user/entities/user.entity';
 import { NewGroupInput } from './dto/group.dto';
 
 @Resolver()

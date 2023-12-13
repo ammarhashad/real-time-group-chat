@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Message } from './entities/message.entity';
 import { MessageInput } from './dto/message.dto';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { PubSub } from 'graphql-subscriptions';
 import {
   PubSubPayload,
   PubsubType,
-} from 'src/pubsub/interfaces/pubsub.interface';
+} from '../pubsub/interfaces/pubsub.interface';
 
 @Injectable()
 export class MessageService {

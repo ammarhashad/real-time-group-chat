@@ -5,7 +5,7 @@ import { LoginInput, NewUserInput } from './dto/user.dto';
 import { AuthToken } from './auth/interface/jwt-payload.interface';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
-import { LoggedInUser } from 'src/decorators/loggedInUser.decorator';
+import { LoggedInUser } from '../decorators/loggedInUser.decorator';
 
 @Resolver()
 export class UserResolver {

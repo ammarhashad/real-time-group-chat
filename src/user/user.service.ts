@@ -1,15 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { LoginInput, NewUserInput } from './dto/user.dto';
 import { genSalt, hash, compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import GraphqlException from 'src/exceptions/graphql.exception';
+import GraphqlException from '../exceptions/graphql.exception';
 import { AuthToken, JwtPayload } from './auth/interface/jwt-payload.interface';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class UserService {
   constructor(
-    @Inject('UserTable')
+    @InjectModel(User)
     private readonly UserTable: typeof User,
     private readonly jwtService: JwtService,
   ) {}

@@ -1,19 +1,18 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Group } from './entities/group.entity';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { NewGroupInput } from './dto/group.dto';
 import {
   Membership,
   MembershipType,
-} from 'src/membership/entities/membership.entity';
+} from '../membership/entities/membership.entity';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class GroupService {
   constructor(
-    @Inject('GroupTable')
+    @InjectModel(Group)
     private readonly GroupTable: typeof Group,
-    @Inject('MembershipTable')
-    private readonly MembershipTable: typeof Membership,
   ) {}
 
   async createNewGroup(

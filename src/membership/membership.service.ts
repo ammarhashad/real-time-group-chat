@@ -1,17 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Membership, MembershipType } from './entities/membership.entity';
 import { MembershipInput } from './dto/membership.dto';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { PubSub } from 'graphql-subscriptions';
 import {
   PubSubPayload,
   PubsubType,
-} from 'src/pubsub/interfaces/pubsub.interface';
+} from '../pubsub/interfaces/pubsub.interface';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class MembershipService {
   constructor(
-    @Inject('MembershipTable')
+    @InjectModel(Membership)
     private readonly MembershipTable: typeof Membership,
     @Inject('PUB_SUB') private pubSub: PubSub,
   ) {}

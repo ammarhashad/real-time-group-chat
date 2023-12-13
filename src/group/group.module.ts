@@ -2,14 +2,10 @@ import { Module } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { Group } from './entities/group.entity';
 import { GroupResolver } from './group.resolver';
-import { Membership } from 'src/membership/entities/membership.entity';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
-  providers: [
-    GroupService,
-    { provide: 'GroupTable', useValue: Group },
-    { provide: 'MembershipTable', useValue: Membership },
-    GroupResolver,
-  ],
+  imports: [SequelizeModule.forFeature([Group])],
+  providers: [GroupService, GroupResolver],
 })
 export class GroupModule {}
